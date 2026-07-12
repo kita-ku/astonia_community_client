@@ -1207,7 +1207,7 @@ static void init_bless(void)
 }
 
 void render_draw_bless(int x, int y, int ticker, int strength, int front)
-{
+{ /* GOLD BLESS PREVIEW */
 	int step;
 	double light;
 
@@ -1221,15 +1221,15 @@ void render_draw_bless(int x, int y, int ticker, int strength, int front)
 
 	for (step = 0; step < strength * 10; step += 17) {
 		render_draw_bless_pix(
-		    x, y, ticker + step + 0, IRGB((int)(24 * light), (int)(24 * light), (int)(31 * light)), front);
+		    x, y, ticker + step + 0, IRGB((int)(31 * light), (int)(26 * light), (int)(6 * light)), front);
 		render_draw_bless_pix(
-		    x, y, ticker + step + 1, IRGB((int)(20 * light), (int)(20 * light), (int)(28 * light)), front);
+		    x, y, ticker + step + 1, IRGB((int)(28 * light), (int)(22 * light), (int)(5 * light)), front);
 		render_draw_bless_pix(
-		    x, y, ticker + step + 2, IRGB((int)(16 * light), (int)(16 * light), (int)(24 * light)), front);
+		    x, y, ticker + step + 2, IRGB((int)(24 * light), (int)(18 * light), (int)(4 * light)), front);
 		render_draw_bless_pix(
-		    x, y, ticker + step + 3, IRGB((int)(12 * light), (int)(12 * light), (int)(20 * light)), front);
+		    x, y, ticker + step + 3, IRGB((int)(20 * light), (int)(14 * light), (int)(3 * light)), front);
 		render_draw_bless_pix(
-		    x, y, ticker + step + 4, IRGB((int)(8 * light), (int)(8 * light), (int)(16 * light)), front);
+		    x, y, ticker + step + 4, IRGB((int)(16 * light), (int)(10 * light), (int)(2 * light)), front);
 	}
 }
 
