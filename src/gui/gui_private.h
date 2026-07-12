@@ -330,6 +330,11 @@ extern uint32_t takegold; // the amout of gold to take
 DLL_EXPORT extern SKLTAB *skltab;
 extern int skltab_max;
 DLL_EXPORT extern int skltab_cnt;
+/* PRIEST UI (added) */
+int local_is_priest(void);
+const char *priest_skill_name(int v);
+void refresh_priest_keytab(void);
+
 
 extern KEYTAB *keytab;
 extern int max_keytab;

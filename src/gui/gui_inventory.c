@@ -198,6 +198,7 @@ void set_skltab(void)
 			skltab[use].v = i;
 
 			strcpy(skltab[use].name, game_skill[i].name);
+			if (local_is_priest()) { const char *pn__ = priest_skill_name(i); if (pn__) strcpy(skltab[use].name, pn__); } /* PRIEST UI (added) */
 			skltab[use].base = (int)value[1][i];
 			skltab[use].curr = (int)value[0][i];
 			skltab[use].raisecost = raisecost = raise_cost(i, (int)value[1][i]);
@@ -220,6 +221,7 @@ void set_skltab(void)
 	}
 
 	skltab_cnt = use;
+	refresh_priest_keytab(); /* PRIEST UI keytab swap */
 	max_skloff = max(0, skltab_cnt - SKLDY);
 
 	set_skloff(0, skloff);

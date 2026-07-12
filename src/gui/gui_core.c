@@ -105,6 +105,74 @@ KEYTAB v3_keytab[] = {
 
 int v3_max_keytab = sizeof(v3_keytab) / sizeof(KEYTAB);
 
+/* ===== PRIEST UI (added) ===== */
+KEYTAB v3_priest_keytab[] = {
+    {'1', 0, 0, 1, 0, "FIRE", TGT_CHR, CL_FIREBALL, V3_FIREBALL, 0},
+    {'2', 0, 0, 1, 0, "LIGHTNINGBALL", TGT_CHR, CL_BALL, V3_FLASH, 0},
+    {'3', 0, 0, 1, 0, "INCINERATE", TGT_SLF, CL_FREEZE, V3_FREEZE, 0},
+    {'4', 0, 0, 1, 0, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
+    {'5', 0, 0, 1, 0, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
+    {'6', 0, 0, 1, 0, "HOLY BLESS", TGT_CHR, CL_BLESS, V3_BLESS, 0},
+    {'7', 0, 0, 1, 0, "RESTORE", TGT_CHR, CL_HEAL, V3_HEAL, 0},
+    {'8', 0, 0, 1, 0, "DIVINE HASTE", TGT_SLF, CL_WARCRY, V3_WARCRY, 0},
+    {'9', 0, 0, 1, 0, "PULSE", TGT_SLF, CL_PULSE, V3_PULSE, 0},
+    {'0', 0, 0, 1, 0, "FIRERING", TGT_SLF, CL_FIREBALL, V3_FIREBALL, 0},
+
+    {'1', 0, 0, 1, 1, "FIRE", TGT_CHR, CL_FIREBALL, V3_FIREBALL, 0},
+    {'2', 0, 0, 1, 1, "LIGHTNINGBALL", TGT_CHR, CL_BALL, V3_FLASH, 0},
+    {'3', 0, 0, 1, 1, "INCINERATE", TGT_SLF, CL_FREEZE, V3_FREEZE, 0},
+    {'4', 0, 0, 1, 1, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
+    {'5', 0, 0, 1, 1, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
+    {'6', 0, 0, 1, 1, "HOLY BLESS", TGT_CHR, CL_BLESS, V3_BLESS, 0},
+    {'7', 0, 0, 1, 1, "RESTORE", TGT_CHR, CL_HEAL, V3_HEAL, 0},
+    {'8', 0, 0, 1, 1, "DIVINE HASTE", TGT_SLF, CL_WARCRY, V3_WARCRY, 0},
+    {'9', 0, 0, 1, 1, "PULSE", TGT_SLF, CL_PULSE, V3_PULSE, 0},
+    {'0', 0, 0, 1, 1, "FIRERING", TGT_SLF, CL_FIREBALL, V3_FIREBALL, 0},
+
+    {'1', 0, 0, 0, 1, "FIRE", TGT_MAP, CL_FIREBALL, V3_FIREBALL, 0},
+    {'2', 0, 0, 0, 1, "LIGHTNINGBALL", TGT_MAP, CL_BALL, V3_FLASH, 0},
+    {'3', 0, 0, 0, 1, "INCINERATE", TGT_SLF, CL_FREEZE, V3_FREEZE, 0},
+    {'4', 0, 0, 0, 1, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
+    {'5', 0, 0, 0, 1, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
+    {'6', 0, 0, 0, 1, "HOLY BLESS SELF", TGT_SLF, CL_BLESS, V3_BLESS, 0},
+    {'7', 0, 0, 0, 1, "RESTORE SELF", TGT_SLF, CL_HEAL, V3_HEAL, 0},
+    {'8', 0, 0, 0, 1, "DIVINE HASTE", TGT_SLF, CL_WARCRY, V3_WARCRY, 0},
+    {'9', 0, 0, 0, 1, "PULSE", TGT_SLF, CL_PULSE, V3_PULSE, 0},
+    {'0', 0, 0, 0, 1, "FIRERING", TGT_SLF, CL_FIREBALL, V3_FIREBALL, 0},
+};
+int v3_max_priest_keytab = sizeof(v3_priest_keytab) / sizeof(KEYTAB);
+
+int local_is_priest(void)
+{
+    return sv_ver == 30 && value[1][34] != 0;
+}
+
+const char *priest_skill_name(int v)
+{
+    switch (v) {
+    case 28: return "Holy Bless";
+    case 29: return "Restore";
+    case 30: return "Incinerate";
+    case 32: return "Silence";
+    case 34: return "Divine Haste";
+    }
+    return 0;
+}
+
+void refresh_priest_keytab(void)
+{
+    if (sv_ver != 30) return;
+    if (local_is_priest()) {
+        keytab = v3_priest_keytab;
+        max_keytab = v3_max_priest_keytab;
+    } else if (keytab == v3_priest_keytab) {
+        keytab = v3_keytab;
+        max_keytab = v3_max_keytab;
+    }
+}
+/* ===== end PRIEST UI ===== */
+
+
 KEYTAB v35_keytab[] = {
     {'1', 0, 0, 1, 0, "FIREBALL", TGT_CHR, CL_FIREBALL, V35_FIRE, 0},
     {'2', 0, 0, 1, 0, "LIGHTNINGBALL", TGT_CHR, CL_BALL, V35_FLASH, 0},
