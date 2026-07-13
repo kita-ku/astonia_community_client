@@ -666,6 +666,9 @@ static size_t sv_ceffect(unsigned char *buf)
 	case 24:
 		len = sizeof(struct cef_bubble);
 		break;
+	case 25:
+		len = sizeof(struct cef_haste);
+		break;
 
 
 	default:
@@ -780,6 +783,9 @@ static size_t svl_ceffect(unsigned char *buf)
 		break;
 	case 24:
 		len = sizeof(struct cef_bubble);
+		break;
+	case 25:
+		len = sizeof(struct cef_haste);
 		break;
 
 
