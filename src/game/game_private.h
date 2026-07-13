@@ -142,7 +142,7 @@ void render_draw_heal(int x, int y, int start, int front);
 void render_draw_potion(int x, int y, int ticker, int strength, int front);
 void render_draw_rain(int x, int y, int ticker, int strength, int front);
 void render_draw_curve(int cx, int cy, int nr, int size, int col);
-void render_display_strike(int fx, int fy, int tx, int ty);
+void render_display_strike(int fx, int fy, int tx, int ty, int red);
 void render_display_pulseback(int fx, int fy, int tx, int ty);
 
 // Game module internal declarations - shared between game_*.c files
@@ -164,7 +164,7 @@ void show_bubbles(void);
 void make_quick(int game, int mcx, int mcy);
 
 // From game_effects.c
-DL *dl_call_strike(int layer, int x1, int y1, int h1, int x2, int y2, int h2);
+DL *dl_call_strike(int layer, int x1, int y1, int h1, int x2, int y2, int h2, int red);
 DL *dl_call_pulseback(int layer, int x1, int y1, int h1, int x2, int y2, int h2);
 DL *dl_call_bless(int layer, int x, int y, int ticker, int strength, int front);
 DL *dl_call_heal(int layer, int x, int y, int start, int front);

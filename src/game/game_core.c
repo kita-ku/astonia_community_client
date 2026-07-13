@@ -181,7 +181,7 @@ void dl_play(void)
 		} else {
 			switch (dlsort[d]->call) {
 			case DLC_STRIKE:
-				render_display_strike(dlsort[d]->call_x1, dlsort[d]->call_y1, dlsort[d]->call_x2, dlsort[d]->call_y2);
+				render_display_strike(dlsort[d]->call_x1, dlsort[d]->call_y1, dlsort[d]->call_x2, dlsort[d]->call_y2, dlsort[d]->call_x3);
 				break;
 			case DLC_NUMBER:
 				render_text_fmt(dlsort[d]->call_x1, dlsort[d]->call_y1, 0xffff,

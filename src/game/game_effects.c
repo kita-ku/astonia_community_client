@@ -16,7 +16,7 @@
 #include "gui/gui.h"
 #include "client/client.h"
 
-DL *dl_call_strike(int layer, int x1, int y1, int h1, int x2, int y2, int h2)
+DL *dl_call_strike(int layer, int x1, int y1, int h1, int x2, int y2, int h2, int red)
 {
 	DL *dl;
 
@@ -28,6 +28,7 @@ DL *dl_call_strike(int layer, int x1, int y1, int h1, int x2, int y2, int h2)
 	dl->call_y1 = y1 - h1;
 	dl->call_x2 = x2;
 	dl->call_y2 = y2 - h2;
+	dl->call_x3 = red;
 
 	if (y1 > y2) {
 		dl->x = x1;

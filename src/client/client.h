@@ -209,6 +209,7 @@ struct cef_strike {
 	int type;
 	char_id_t cn;
 	int x, y; // target
+	int strength; // 0x40000000 bit = priest red incinerate strike
 };
 
 struct cef_ball {

@@ -208,7 +208,8 @@ static void display_game_spells(void)
 					}
 
 					// mn is target
-					dl_call_strike(GME_LAY, x1, y1, h1, x2, y2, h2);
+					dl_call_strike(GME_LAY, x1, y1, h1, x2, y2, h2,
+					    (ceffect[nr].strike.strength & 0x40000000) ? 1 : 0);
 					// addline("strike %d,%d to %d,%d",x1,y1,x2,y2);
 					break;
 

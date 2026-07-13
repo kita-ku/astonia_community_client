@@ -344,7 +344,7 @@ DLL_EXPORT void render_line(int fx, int fy, int tx, int ty, unsigned short col)
  * Used for spell effects and combat visuals.
  *
  */
-void render_display_strike(int fx, int fy, int tx, int ty)
+void render_display_strike(int fx, int fy, int tx, int ty, int red)
 {
 	int mx, my;
 	int dx, dy, d, l;
@@ -359,14 +359,14 @@ void render_display_strike(int fx, int fy, int tx, int ty)
 	if (dx >= dy) {
 		for (d = -4; d < 5; d++) {
 			l = (4 - abs(d)) * 4;
-			col = (unsigned short)IRGB(l, l, 31);
+			col = red ? (unsigned short)IRGB(31, l, l) : (unsigned short)IRGB(l, l, 31);
 			render_line(fx, fy, mx, my + d, col);
 			render_line(mx, my + d, tx, ty, col);
 		}
 	} else {
 		for (d = -4; d < 5; d++) {
 			l = (4 - abs(d)) * 4;
-			col = (unsigned short)IRGB(l, l, 31);
+			col = red ? (unsigned short)IRGB(31, l, l) : (unsigned short)IRGB(l, l, 31);
 			render_line(fx, fy, mx + d, my, col);
 			render_line(mx + d, my, tx, ty, col);
 		}

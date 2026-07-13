@@ -306,6 +306,7 @@ struct cef_strike {
 	int type;
 	int cn;
 	int x, y; // target
+	int strength;
 };
 
 struct cef_ball {
