@@ -360,11 +360,10 @@ static void display_game_spells(void)
 					map[mn].sink = 12;
 					break;
 				case 21: // pulse
-					if (ceffect[nr].pulse.strength & 0x40000000) { // Sanctuary: big GOLD zone ring, a couple of circles
+					if (ceffect[nr].pulse.strength & 0x40000000) { // Sanctuary: single gold zone ring (matches the AOE)
 						size = ceffect[nr].pulse.strength & 0xffff;
 						if (size < 10) size = 90;
 						for (n = 0; n < 4; n++) {
-							dl_call_pulse(GME_LAY, scrx, scry - 2, n, size, IRGB(31, 24, 3));
 							dl_call_pulse(GME_LAY, scrx, scry, n, size * 2 / 3, IRGB(31, 30, 14));
 						}
 					} else {
