@@ -306,6 +306,7 @@ struct cef_pulse {
 	int nr;
 	int type;
 	uint32_t start;
+	int strength; // 0x40000000 bit = Sanctuary held-at-max ring
 };
 
 struct cef_pulseback {

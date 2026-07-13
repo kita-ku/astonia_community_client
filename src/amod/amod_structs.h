@@ -403,6 +403,7 @@ struct cef_pulse {
 	int nr;
 	int type;
 	uint32_t start;
+	int strength;
 };
 
 struct cef_pulseback {

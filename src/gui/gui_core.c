@@ -113,7 +113,7 @@ KEYTAB v3_priest_keytab[] = {
     {'4', 0, 0, 1, 0, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
     {'5', 0, 0, 1, 0, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
     {'6', 0, 0, 1, 0, "HOLY BLESS", TGT_CHR, CL_BLESS, V3_BLESS, 0},
-    {'7', 0, 0, 1, 0, "RESTORE", TGT_CHR, CL_HEAL, V3_HEAL, 0},
+    {'7', 0, 0, 1, 0, "SANCTUARY", TGT_SLF, CL_HEAL, V3_HEAL, 0},
     {'8', 0, 0, 1, 0, "DIVINE HASTE", TGT_SLF, CL_WARCRY, V3_WARCRY, 0},
     {'9', 0, 0, 1, 0, "PULSE", TGT_SLF, CL_PULSE, V3_PULSE, 0},
     {'0', 0, 0, 1, 0, "FIRERING", TGT_SLF, CL_FIREBALL, V3_FIREBALL, 0},
@@ -124,7 +124,7 @@ KEYTAB v3_priest_keytab[] = {
     {'4', 0, 0, 1, 1, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
     {'5', 0, 0, 1, 1, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
     {'6', 0, 0, 1, 1, "HOLY BLESS", TGT_CHR, CL_BLESS, V3_BLESS, 0},
-    {'7', 0, 0, 1, 1, "RESTORE", TGT_CHR, CL_HEAL, V3_HEAL, 0},
+    {'7', 0, 0, 1, 1, "SANCTUARY", TGT_SLF, CL_HEAL, V3_HEAL, 0},
     {'8', 0, 0, 1, 1, "DIVINE HASTE", TGT_SLF, CL_WARCRY, V3_WARCRY, 0},
     {'9', 0, 0, 1, 1, "PULSE", TGT_SLF, CL_PULSE, V3_PULSE, 0},
     {'0', 0, 0, 1, 1, "FIRERING", TGT_SLF, CL_FIREBALL, V3_FIREBALL, 0},
@@ -135,7 +135,7 @@ KEYTAB v3_priest_keytab[] = {
     {'4', 0, 0, 0, 1, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
     {'5', 0, 0, 0, 1, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
     {'6', 0, 0, 0, 1, "HOLY BLESS SELF", TGT_SLF, CL_BLESS, V3_BLESS, 0},
-    {'7', 0, 0, 0, 1, "RESTORE SELF", TGT_SLF, CL_HEAL, V3_HEAL, 0},
+    {'7', 0, 0, 0, 1, "SANCTUARY", TGT_SLF, CL_HEAL, V3_HEAL, 0},
     {'8', 0, 0, 0, 1, "DIVINE HASTE", TGT_SLF, CL_WARCRY, V3_WARCRY, 0},
     {'9', 0, 0, 0, 1, "PULSE", TGT_SLF, CL_PULSE, V3_PULSE, 0},
     {'0', 0, 0, 0, 1, "FIRERING", TGT_SLF, CL_FIREBALL, V3_FIREBALL, 0},
@@ -151,7 +151,7 @@ const char *priest_skill_name(int v)
 {
     switch (v) {
     case 28: return "Holy Bless";
-    case 29: return "Restore";
+    case 29: return "Sanctuary";
     case 30: return "Incinerate";
     case 32: return "Silence";
     case 34: return "Divine Haste";
@@ -163,7 +163,7 @@ const char *priest_skill_desc(int v)
 {
     switch (v) {
     case 28: return "Holy Bless empowers you or an ally, raising attributes and speed. It stacks on top of a mage's Bless and can be extended with Duration. The priest's signature blessing.";
-    case 29: return "Restore mends injuries and also reinforces the target's magic shield. The greater the wound, the more Mana required to heal it.";
+    case 29: return "Sanctuary surrounds you with a draining aura, siphoning mana (or, failing that, magic shield) from nearby enemies into your own reserves. The more foes around you, the more you leech.";
     case 30: return "Incinerate sets the enemy ablaze with holy fire, dealing damage over time that bypasses armor and magic shield.";
     case 32: return "Silence unleashes a burst that interrupts and slows nearby enemies, disrupting their attacks and spellcasting.";
     case 34: return "Divine Haste blesses you with holy speed, greatly increasing your movement and attack tempo for a time.";

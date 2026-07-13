@@ -360,7 +360,7 @@ static void display_game_spells(void)
 					map[mn].sink = 12;
 					break;
 				case 21: // pulse
-					size = ((tick - ceffect[nr].pulse.start) % 6) * 4 + 10;
+					size = (ceffect[nr].pulse.strength & 0x40000000) ? 30 : ((tick - ceffect[nr].pulse.start) % 6) * 4 + 10;
 					for (n = 0; n < 4; n++) {
 						dl_call_pulse(GME_LAY, scrx, scry - 3, n, size + 1, IRGB(0, 12, 0));
 						dl_call_pulse(GME_LAY, scrx, scry - 2, n, size - 2, IRGB(0, 16, 0));
