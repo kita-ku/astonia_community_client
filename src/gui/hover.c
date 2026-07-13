@@ -405,7 +405,7 @@ static void display_hover_skill_v35(void)
 			return;
 		}
 
-		height += render_text_break_length(0, 0, width - 12, 0xffff, 0, game_skilldesc[v]);
+		height += render_text_break_length(0, 0, width - 12, 0xffff, 0, ((local_is_priest() && priest_skill_desc(v)) ? priest_skill_desc(v) : game_skilldesc[v]));
 
 		int sx = mousex + 8;
 		if (sx < dotx(DOT_TL)) {
@@ -425,7 +425,7 @@ static void display_hover_skill_v35(void)
 
 		render_shaded_rect(sx, sy, sx + width + 8, sy + height + 8, 0x0000, 150);
 
-		sy = render_text_break(sx + 4, sy + 4, sx + width - 8, 0xffff, 0, game_skilldesc[v]) + 10;
+		sy = render_text_break(sx + 4, sy + 4, sx + width - 8, 0xffff, 0, ((local_is_priest() && priest_skill_desc(v)) ? priest_skill_desc(v) : game_skilldesc[v])) + 10;
 	}
 }
 
@@ -545,7 +545,7 @@ static void display_hover_skill_v3(void)
 			height += 10; // add a free line if there are more lines to display
 		}
 
-		height += render_text_break_length(0, 0, width - 12, 0xffff, 0, game_skilldesc[v]);
+		height += render_text_break_length(0, 0, width - 12, 0xffff, 0, ((local_is_priest() && priest_skill_desc(v)) ? priest_skill_desc(v) : game_skilldesc[v]));
 
 		int sx = mousex + 8;
 		if (sx < dotx(DOT_TL)) {
@@ -565,7 +565,7 @@ static void display_hover_skill_v3(void)
 
 		render_shaded_rect(sx, sy, sx + width + 8, sy + height + 8, 0x0000, 150);
 
-		sy = render_text_break(sx + 4, sy + 4, sx + width - 8, 0xffff, 0, game_skilldesc[v]) + 10;
+		sy = render_text_break(sx + 4, sy + 4, sx + width - 8, 0xffff, 0, ((local_is_priest() && priest_skill_desc(v)) ? priest_skill_desc(v) : game_skilldesc[v])) + 10;
 
 		// Show base and current values with equipment bonus
 		if (equip_bonus != 0) {

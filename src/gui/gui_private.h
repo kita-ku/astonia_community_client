@@ -333,6 +333,7 @@ DLL_EXPORT extern int skltab_cnt;
 /* PRIEST UI (added) */
 int local_is_priest(void);
 const char *priest_skill_name(int v);
+const char *priest_skill_desc(int v);
 void refresh_priest_keytab(void);
 
 

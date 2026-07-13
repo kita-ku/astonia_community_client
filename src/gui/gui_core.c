@@ -108,7 +108,7 @@ int v3_max_keytab = sizeof(v3_keytab) / sizeof(KEYTAB);
 /* ===== PRIEST UI (added) ===== */
 KEYTAB v3_priest_keytab[] = {
     {'1', 0, 0, 1, 0, "FIRE", TGT_CHR, CL_FIREBALL, V3_FIREBALL, 0},
-    {'2', 0, 0, 1, 0, "LIGHTNINGBALL", TGT_CHR, CL_BALL, V3_FLASH, 0},
+    {'2', 0, 0, 1, 0, "DIVINE HASTE", TGT_SLF, CL_WARCRY, V3_WARCRY, 0},
     {'3', 0, 0, 1, 0, "INCINERATE", TGT_SLF, CL_FREEZE, V3_FREEZE, 0},
     {'4', 0, 0, 1, 0, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
     {'5', 0, 0, 1, 0, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
@@ -119,7 +119,7 @@ KEYTAB v3_priest_keytab[] = {
     {'0', 0, 0, 1, 0, "FIRERING", TGT_SLF, CL_FIREBALL, V3_FIREBALL, 0},
 
     {'1', 0, 0, 1, 1, "FIRE", TGT_CHR, CL_FIREBALL, V3_FIREBALL, 0},
-    {'2', 0, 0, 1, 1, "LIGHTNINGBALL", TGT_CHR, CL_BALL, V3_FLASH, 0},
+    {'2', 0, 0, 1, 1, "DIVINE HASTE", TGT_SLF, CL_WARCRY, V3_WARCRY, 0},
     {'3', 0, 0, 1, 1, "INCINERATE", TGT_SLF, CL_FREEZE, V3_FREEZE, 0},
     {'4', 0, 0, 1, 1, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
     {'5', 0, 0, 1, 1, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
@@ -130,7 +130,7 @@ KEYTAB v3_priest_keytab[] = {
     {'0', 0, 0, 1, 1, "FIRERING", TGT_SLF, CL_FIREBALL, V3_FIREBALL, 0},
 
     {'1', 0, 0, 0, 1, "FIRE", TGT_MAP, CL_FIREBALL, V3_FIREBALL, 0},
-    {'2', 0, 0, 0, 1, "LIGHTNINGBALL", TGT_MAP, CL_BALL, V3_FLASH, 0},
+    {'2', 0, 0, 0, 1, "DIVINE HASTE", TGT_SLF, CL_WARCRY, V3_WARCRY, 0},
     {'3', 0, 0, 0, 1, "INCINERATE", TGT_SLF, CL_FREEZE, V3_FREEZE, 0},
     {'4', 0, 0, 0, 1, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
     {'5', 0, 0, 0, 1, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
@@ -155,6 +155,18 @@ const char *priest_skill_name(int v)
     case 30: return "Incinerate";
     case 32: return "Silence";
     case 34: return "Divine Haste";
+    }
+    return 0;
+}
+
+const char *priest_skill_desc(int v)
+{
+    switch (v) {
+    case 28: return "Holy Bless empowers you or an ally, raising attributes and speed. It stacks on top of a mage's Bless and can be extended with Duration. The priest's signature blessing.";
+    case 29: return "Restore mends injuries and also reinforces the target's magic shield. The greater the wound, the more Mana required to heal it.";
+    case 30: return "Incinerate sets the enemy ablaze with holy fire, dealing damage over time that bypasses armor and magic shield.";
+    case 32: return "Silence unleashes a burst that interrupts and slows nearby enemies, disrupting their attacks and spellcasting.";
+    case 34: return "Divine Haste blesses you with holy speed, greatly increasing your movement and attack tempo for a time.";
     }
     return 0;
 }

@@ -1207,11 +1207,14 @@ static void init_bless(void)
 }
 
 void render_draw_bless(int x, int y, int ticker, int strength, int front)
-{ /* GOLD BLESS PREVIEW */
-	int step;
+{
+	int step, holy;
 	double light;
 
 	init_bless();
+
+	holy = strength & 0x40000000; /* priest Holy Bless -> gold; regular bless -> blue */
+	strength &= 0x3fffffff;
 
 	if (ticker > 62) {
 		light = 1.0;
@@ -1220,16 +1223,19 @@ void render_draw_bless(int x, int y, int ticker, int strength, int front)
 	}
 
 	for (step = 0; step < strength * 10; step += 17) {
-		render_draw_bless_pix(
-		    x, y, ticker + step + 0, IRGB((int)(31 * light), (int)(26 * light), (int)(6 * light)), front);
-		render_draw_bless_pix(
-		    x, y, ticker + step + 1, IRGB((int)(28 * light), (int)(22 * light), (int)(5 * light)), front);
-		render_draw_bless_pix(
-		    x, y, ticker + step + 2, IRGB((int)(24 * light), (int)(18 * light), (int)(4 * light)), front);
-		render_draw_bless_pix(
-		    x, y, ticker + step + 3, IRGB((int)(20 * light), (int)(14 * light), (int)(3 * light)), front);
-		render_draw_bless_pix(
-		    x, y, ticker + step + 4, IRGB((int)(16 * light), (int)(10 * light), (int)(2 * light)), front);
+		if (holy) {
+			render_draw_bless_pix(x, y, ticker + step + 0, IRGB((int)(31 * light), (int)(26 * light), (int)(6 * light)), front);
+			render_draw_bless_pix(x, y, ticker + step + 1, IRGB((int)(28 * light), (int)(22 * light), (int)(5 * light)), front);
+			render_draw_bless_pix(x, y, ticker + step + 2, IRGB((int)(24 * light), (int)(18 * light), (int)(4 * light)), front);
+			render_draw_bless_pix(x, y, ticker + step + 3, IRGB((int)(20 * light), (int)(14 * light), (int)(3 * light)), front);
+			render_draw_bless_pix(x, y, ticker + step + 4, IRGB((int)(16 * light), (int)(10 * light), (int)(2 * light)), front);
+		} else {
+			render_draw_bless_pix(x, y, ticker + step + 0, IRGB((int)(24 * light), (int)(24 * light), (int)(31 * light)), front);
+			render_draw_bless_pix(x, y, ticker + step + 1, IRGB((int)(20 * light), (int)(20 * light), (int)(28 * light)), front);
+			render_draw_bless_pix(x, y, ticker + step + 2, IRGB((int)(16 * light), (int)(16 * light), (int)(24 * light)), front);
+			render_draw_bless_pix(x, y, ticker + step + 3, IRGB((int)(12 * light), (int)(12 * light), (int)(20 * light)), front);
+			render_draw_bless_pix(x, y, ticker + step + 4, IRGB((int)(8 * light), (int)(8 * light), (int)(16 * light)), front);
+		}
 	}
 }
 

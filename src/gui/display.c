@@ -807,6 +807,7 @@ void display_selfspells(void)
 	sprintf(hover_freeze_text, "Freeze: Not active");
 	sprintf(hover_heal_text, "Heal: Not active");
 	sprintf(hover_potion_text, "Potion: Not active");
+	sprintf(hover_rage_text, "Holy Bless: Not active");
 
 	for (int n = 0; n < 4; n++) {
 		int nr = find_cn_ceffect(cn, n);
@@ -816,18 +817,24 @@ void display_selfspells(void)
 
 		switch (ceffect[nr].generic.type) {
 		case 9: {
+			int is_holy = (ceffect[nr].bless.strength & 0x40000000) ? 1 : 0;
+			int col = is_holy ? 3 : 2;
 			int step = 50 - 50 * (int)(ceffect[nr].bless.stop - tick) /
 			                    (int)(ceffect[nr].bless.stop - ceffect[nr].bless.start);
 			render_push_clip();
 			render_more_clip(0, 0, XRES, doty(DOT_SSP) + 119 - 68);
 			if (ceffect[nr].bless.stop - tick < 24 * 30 && (tick & 4)) {
-				render_sprite(997, dotx(DOT_SSP) + 2 * 10, doty(DOT_SSP) + step, RENDERFX_BRIGHT, RENDER_ALIGN_NORMAL);
+				render_sprite(997, dotx(DOT_SSP) + col * 10, doty(DOT_SSP) + step, RENDERFX_BRIGHT, RENDER_ALIGN_NORMAL);
 			} else {
 				render_sprite(
-				    997, dotx(DOT_SSP) + 2 * 10, doty(DOT_SSP) + step, RENDERFX_NORMAL_LIGHT, RENDER_ALIGN_NORMAL);
+				    997, dotx(DOT_SSP) + col * 10, doty(DOT_SSP) + step, RENDERFX_NORMAL_LIGHT, RENDER_ALIGN_NORMAL);
 			}
 			render_pop_clip();
-			sprintf(hover_bless_text, "Bless: %us to go", (ceffect[nr].bless.stop - tick) / 24);
+			if (is_holy) {
+				sprintf(hover_rage_text, "Holy Bless: %us to go", (ceffect[nr].bless.stop - tick) / 24);
+			} else {
+				sprintf(hover_bless_text, "Bless: %us to go", (ceffect[nr].bless.stop - tick) / 24);
+			}
 			break;
 		}
 		case 10:
@@ -991,29 +998,10 @@ void display_military(void)
 
 void display_rage(void)
 {
-	int step;
-
-	sprintf(hover_rage_text, "Rage: Not active");
-
-	if (!value[0][sv_val(V_RAGE)] || !rage) {
-		return;
-	}
-
-	if (sv_ver == 35) {
-		step = 50 - 50 * rage / (value[0][V35_RAGE] + (int)(value[0][V35_TACTICS] * 0.15 + 0.1));
-	} else {
-		step = (int)(50 - 50 * rage / value[0][V3_RAGE]);
-	}
-	render_push_clip();
-	render_more_clip(0, 0, 800, doty(DOT_SSP) + 119 - 68);
-	render_sprite(997, dotx(DOT_SSP) + 3 * 10, doty(DOT_SSP) + step, RENDERFX_NORMAL_LIGHT, RENDER_ALIGN_NORMAL);
-	render_pop_clip();
-
-	if (sv_ver == 35) {
-		sprintf(hover_rage_text, "Rage: +%d", rage / 4);
-	} else {
-		sprintf(hover_rage_text, "Rage: %d%%", 100 * rage / value[0][V3_RAGE]);
-	}
+	// Holy Bless now occupies this bar slot (column 3) for ALL classes, since
+	// anyone (warriors included) can be Holy Blessed by a priest. The Holy Bless
+	// timer bar is drawn in display_selfspells(); the Rage mechanic still works,
+	// only its timer bar has been repurposed.
 }
 
 void display_game_special(void)
