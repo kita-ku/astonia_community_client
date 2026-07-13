@@ -561,6 +561,8 @@ int is_char_ceffect(int type)
 		return 1;
 	case 23:
 		return 1;
+	case 25:
+		return 1;
 	}
 	return 0;
 }

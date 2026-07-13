@@ -363,6 +363,14 @@ struct cef_bless {
 	int strength;
 };
 
+struct cef_haste {
+	int nr;
+	int type;
+	int cn;
+	uint32_t start;
+	uint32_t stop;
+};
+
 struct cef_heal {
 	int nr;
 	int type;
@@ -468,6 +476,7 @@ union ceffect {
 	struct cef_explode explode;
 	struct cef_warcry warcry;
 	struct cef_bless bless;
+	struct cef_haste haste;
 	struct cef_heal heal;
 	struct cef_freeze freeze;
 	struct cef_burn burn;

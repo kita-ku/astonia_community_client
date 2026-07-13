@@ -1296,6 +1296,13 @@ void display_game_map(struct map *cmap)
 						dl->renderfx.freeze = RENDERFX_MAX_FREEZE - 1; // running
 					}
 				}
+				if ((unsigned int)ceffect[nr].haste.cn == map[mn].cn && ceffect[nr].generic.type == 25) { // divine haste - golden tint
+					dl->renderfx.cr = (char)min(120, dl->renderfx.cr + 70);
+					dl->renderfx.cg = (char)min(120, dl->renderfx.cg + 45);
+					dl->renderfx.cb = (char)max(-120, dl->renderfx.cb - 30);
+					dl->renderfx.sat = (char)min(20, dl->renderfx.sat + 12);
+					dl->renderfx.clight = (char)min(120, dl->renderfx.clight + 25);
+				}
 				if ((unsigned int)ceffect[nr].curse.cn == map[mn].cn && ceffect[nr].generic.type == 18) { // curse
 
 					dl->renderfx.sat = (char)min(20, dl->renderfx.sat + (ceffect[nr].curse.strength / 4) + 5);
