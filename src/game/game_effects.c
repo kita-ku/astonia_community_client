@@ -201,6 +201,28 @@ DL *dl_call_rain(int layer, int x, int y, int nr, int color)
 	return dl;
 }
 
+// Enqueue a single soft pixel at an absolute screen position (used by the animated
+// Sanctuary seal's orbiting motes). Same DLC_PIXEL path as dl_call_rain, but without
+// the rain's falling offset -- the point is drawn exactly where asked.
+DL *dl_call_pixel(int layer, int x, int y, int color)
+{
+	DL *dl;
+
+	dl = dl_next();
+
+	dl->call = DLC_PIXEL;
+	dl->layer = layer;
+
+	dl->call_x1 = x;
+	dl->call_y1 = y;
+	dl->call_x2 = color;
+
+	dl->x = x;
+	dl->y = y;
+
+	return dl;
+}
+
 DL *dl_call_rain2(int layer, int x, int y, int ticker, int strength, int front)
 {
 	DL *dl;

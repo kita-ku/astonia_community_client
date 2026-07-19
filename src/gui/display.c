@@ -1281,6 +1281,24 @@ void action_set_key(int slot, SDL_Keycode key)
 static char *unlocked_desc = "Move the mouse over one of the other icons and press the key you want to assign to it.";
 static char *locked_desc = "Change the keys assigned to the icons.";
 
+// Priest-only action-bar icon art. The action bar (sprites 800+slot) is shared by
+// all classes, so we remap just the priest's spell slots to priest-specific art
+// (new sprite numbers injected into the gx*_patch archives). Other classes are
+// unaffected and keep the standard icons.
+static unsigned int priest_action_sprite(int slot)
+{
+	if (local_is_priest()) {
+		switch (slot) {
+		case ACTION_LBALL:  return 8802; // Divine Haste (replaces Lightning Ball)
+		case ACTION_FLASH:  return 8803; // Incinerate    (replaces Flash)
+		case ACTION_FREEZE: return 8804; // Silence       (replaces Freeze)
+		case ACTION_BLESS:  return 8806; // Holy Bless     (replaces Bless)
+		case ACTION_HEAL:   return 8807; // Sanctuary      (replaces Heal)
+		}
+	}
+	return (unsigned int)(800 + slot);
+}
+
 void display_action(void)
 {
 	static uint32_t hoover_start = 0, hoover_start2 = 0;
@@ -1310,7 +1328,7 @@ void display_action(void)
 			if (!has_action_skill(i)) {
 				continue;
 			}
-			fx.sprite = (unsigned int)(800 + i);
+			fx.sprite = priest_action_sprite(i);
 			fx.ml = fx.ll = fx.rl = fx.ul = fx.dl =
 			    (i == actsel || i == action_ovr) ? RENDERFX_BRIGHT : RENDERFX_NORMAL_LIGHT;
 			render_sprite_fx(&fx, butx(BUT_ACT_BEG + i), buty(BUT_ACT_BEG + i));

@@ -114,7 +114,7 @@ KEYTAB v3_priest_keytab[] = {
     {'5', 0, 0, 1, 0, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
     {'6', 0, 0, 1, 0, "HOLY BLESS", TGT_CHR, CL_BLESS, V3_BLESS, 0},
     {'7', 0, 0, 1, 0, "SANCTUARY", TGT_SLF, CL_HEAL, V3_HEAL, 0},
-    {'8', 0, 0, 1, 0, "DIVINE HASTE", TGT_CHR, CL_HEAL, 34, 0},
+    {'8', 0, 0, 1, 0, "empty", -1, -1, -1, 0},
     {'9', 0, 0, 1, 0, "PULSE", TGT_SLF, CL_PULSE, V3_PULSE, 0},
     {'0', 0, 0, 1, 0, "FIRERING", TGT_SLF, CL_FIREBALL, V3_FIREBALL, 0},
 
@@ -125,7 +125,7 @@ KEYTAB v3_priest_keytab[] = {
     {'5', 0, 0, 1, 1, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
     {'6', 0, 0, 1, 1, "HOLY BLESS", TGT_CHR, CL_BLESS, V3_BLESS, 0},
     {'7', 0, 0, 1, 1, "SANCTUARY", TGT_SLF, CL_HEAL, V3_HEAL, 0},
-    {'8', 0, 0, 1, 1, "DIVINE HASTE", TGT_CHR, CL_HEAL, 34, 0},
+    {'8', 0, 0, 1, 1, "empty", -1, -1, -1, 0},
     {'9', 0, 0, 1, 1, "PULSE", TGT_SLF, CL_PULSE, V3_PULSE, 0},
     {'0', 0, 0, 1, 1, "FIRERING", TGT_SLF, CL_FIREBALL, V3_FIREBALL, 0},
 
@@ -136,7 +136,7 @@ KEYTAB v3_priest_keytab[] = {
     {'5', 0, 0, 0, 1, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
     {'6', 0, 0, 0, 1, "HOLY BLESS SELF", TGT_SLF, CL_BLESS, V3_BLESS, 0},
     {'7', 0, 0, 0, 1, "SANCTUARY", TGT_SLF, CL_HEAL, V3_HEAL, 0},
-    {'8', 0, 0, 0, 1, "DIVINE HASTE SELF", TGT_SLF, CL_WARCRY, 34, 0},
+    {'8', 0, 0, 0, 1, "empty", -1, -1, -1, 0},
     {'9', 0, 0, 0, 1, "PULSE", TGT_SLF, CL_PULSE, V3_PULSE, 0},
     {'0', 0, 0, 0, 1, "FIRERING", TGT_SLF, CL_FIREBALL, V3_FIREBALL, 0},
 };

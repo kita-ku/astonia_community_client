@@ -171,6 +171,7 @@ DL *dl_call_heal(int layer, int x, int y, int start, int front);
 DL *dl_call_pulse(int layer, int x, int y, int nr, int size, int color);
 DL *dl_call_potion(int layer, int x, int y, int ticker, int strength, int front);
 DL *dl_call_rain(int layer, int x, int y, int nr, int color);
+DL *dl_call_pixel(int layer, int x, int y, int color);
 DL *dl_call_rain2(int layer, int x, int y, int ticker, int strength, int front);
 DL *dl_call_number(int layer, int x, int y, int nr);
 

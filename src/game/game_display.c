@@ -85,6 +85,55 @@ static int trans_y(int frx, int fry, int tox, int toy, int step, uint32_t start)
 	return (x + y) * 10 / 1024 + mapoffy + mapaddy /*MR*/ - FDY / 2;
 }
 
+// Animated Sanctuary "holy seal" (design S3, "slow_band"). Fully procedural -- no
+// sprite art. Three concurrent gold waves continuously emanate from near the center
+// out to R; each is a double-ring band whose brightness swells then fades, with 8
+// glow motes slowly orbiting. R is the outer ring's horizontal screen radius (the
+// caller passes size*2/3), so the whole seal scales with the live Sanctuary AOE.
+// age = tick - pulse.start (per-effect frame counter). Loop period T ~= 4s.
+static void render_sanctuary_seal(int cx, int cy, int R, int age)
+{
+	const int T = 72;  // loop period in ticks (~4s)
+	const int NW = 3;  // concurrent waves
+	int Rmin = R / 6;
+	double ph = (double)(((age % T) + T) % T) / (double)T;
+	double rot = ph * (2.0 * M_PI) * 0.5; // motes: half a turn per loop (slow)
+	int w, k, n;
+
+	for (w = 0; w < NW; w++) {
+		double prog = ph + (double)w / NW;
+		prog -= (double)(int)prog; // frac()
+		int r = Rmin + (int)(prog * (R - Rmin));
+		double b = sin(prog * M_PI); // 0 -> 1 -> 0 over the wave's life
+		if (b < 0) b = 0;
+
+		int cout = (w & 1)
+		    ? IRGB((int)(31 * b), (int)(31 * b), (int)(24 * b))  // pale gold
+		    : IRGB((int)(31 * b), (int)(30 * b), (int)(16 * b)); // warm gold
+		int cin = IRGB((int)(20 * b), (int)(17 * b), (int)(8 * b));
+
+		// two concentric ring bands (a full circle = 4 quadrant curves each)
+		for (n = 0; n < 4; n++) {
+			dl_call_pulse(GME_LAY, cx, cy, n, r, cout);
+			dl_call_pulse(GME_LAY, cx, cy, n, r - 3, cin);
+		}
+
+		// 8 glow motes slowly orbiting this wave
+		for (k = 0; k < 8; k++) {
+			double a = rot + k * (2.0 * M_PI) / 8.0;
+			int mx = cx + (int)(sin(a) * r);
+			int my = cy + (int)(cos(a) * r * 2 / 3);
+			int core = IRGB((int)(31 * b), (int)(31 * b), (int)(26 * b));
+			int halo = IRGB((int)(31 * b), (int)(28 * b), (int)(16 * b));
+			dl_call_pixel(GME_LAY, mx, my, core);
+			dl_call_pixel(GME_LAY, mx + 1, my, halo);
+			dl_call_pixel(GME_LAY, mx - 1, my, halo);
+			dl_call_pixel(GME_LAY, mx, my + 1, halo);
+			dl_call_pixel(GME_LAY, mx, my - 1, halo);
+		}
+	}
+}
+
 static void display_game_spells(void)
 {
 	int i, x, y, dx;
@@ -360,12 +409,10 @@ static void display_game_spells(void)
 					map[mn].sink = 12;
 					break;
 				case 21: // pulse
-					if (ceffect[nr].pulse.strength & 0x40000000) { // Sanctuary: single gold zone ring (matches the AOE)
+					if (ceffect[nr].pulse.strength & 0x40000000) { // Sanctuary: animated gold holy seal (procedural, scales with AOE)
 						size = ceffect[nr].pulse.strength & 0xffff;
 						if (size < 10) size = 90;
-						for (n = 0; n < 4; n++) {
-							dl_call_pulse(GME_LAY, scrx, scry, n, size * 2 / 3, IRGB(31, 30, 14));
-						}
+						render_sanctuary_seal(scrx, scry, size * 2 / 3, (int)(tick - ceffect[nr].pulse.start));
 					} else {
 						size = ((tick - ceffect[nr].pulse.start) % 6) * 4 + 10;
 						for (n = 0; n < 4; n++) {
