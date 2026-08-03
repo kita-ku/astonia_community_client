@@ -210,7 +210,7 @@ static void display_game_spells(void)
 					}
 					break;
 
-				case 5: // flash
+				case 5: // flash (and, when flagged, the priest's red Incinerate aura)
 					x = scrx + map[mn].xadd + (int)(cos(2 * M_PI * (now % 1000) / 1000.0) * 16);
 					y = scry + map[mn].yadd + (int)(sin(2 * M_PI * (now % 1000) / 1000.0) * 8);
 					dl = dl_next_set(GME_LAY, 1006, x, y, RENDERFX_NORMAL_LIGHT); // shade
@@ -218,10 +218,22 @@ static void display_game_spells(void)
 						note("error in flash #1");
 						break;
 					}
+					if (ceffect[nr].flash.flags & CEF_FLASH_INCINERATE) {
+						dl->renderfx.cr = 100;
+						dl->renderfx.cg = -70;
+						dl->renderfx.cb = -110;
+						dl->renderfx.sat = 20;
+					}
 					dl = dl_next_set(GME_LAY, 1005, x, y, RENDERFX_NORMAL_LIGHT); // small lightningball
 					if (!dl) {
 						note("error in flash #2");
 						break;
+					}
+					if (ceffect[nr].flash.flags & CEF_FLASH_INCINERATE) {
+						dl->renderfx.cr = 100;
+						dl->renderfx.cg = -70;
+						dl->renderfx.cb = -110;
+						dl->renderfx.sat = 20;
 					}
 					dl->h = 50;
 					break;

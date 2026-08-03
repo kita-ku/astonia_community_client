@@ -28,7 +28,7 @@
 // Bump this whenever a new client build must be adopted (art/keybindings/features).
 // The server flags any client reporting a lower version and prompts the player to
 // update (soft notice, see REQUIRED_CLIENT_VERSION in the server's player.c).
-#define CLIENT_PROTOCOL_VERSION 4
+#define CLIENT_PROTOCOL_VERSION 5
 
 unsigned int display_gfx = 0;
 uint32_t display_time = 0;

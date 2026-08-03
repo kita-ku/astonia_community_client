@@ -116,6 +116,7 @@ typedef enum {
 #define CL_PING           39
 #define CL_GETQUESTLOG    40
 #define CL_REOPENQUEST    41
+#define CL_INCINERATE     42 // priest: cast Incinerate aura on a friendly target
 
 #define PAC_IDLE        0
 #define PAC_MOVE        1
@@ -241,7 +242,13 @@ struct cef_flash {
 	int nr;
 	int type;
 	char_id_t cn;
+	// The server writes a full 32-bit cn here; we only ever need the low 16 bits, so the
+	// server hides a flag bitfield in the upper half. Bit 0 = priest Incinerate (red ball).
+	// This occupies existing struct padding, so the wire size is unchanged.
+	uint16_t flags;
 };
+
+#define CEF_FLASH_INCINERATE 0x0001
 
 struct cef_explode {
 	int nr;

@@ -1742,6 +1742,7 @@ void cmd_some_spell(int spell, int x, int y, unsigned int chr)
 	switch (spell) {
 	case CL_BLESS:
 	case CL_HEAL:
+	case CL_INCINERATE:
 		buf[0] = (spell < 0) ? 0 : ((spell > 255) ? 255 : (unsigned char)spell);
 		uchr = (chr > UINT16_MAX) ? UINT16_MAX : (uint16_t)chr;
 		store_u16(buf + 1, uchr);
