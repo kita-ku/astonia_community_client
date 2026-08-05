@@ -110,7 +110,7 @@ KEYTAB v3_priest_keytab[] = {
     {'1', 0, 0, 1, 0, "FIRE", TGT_CHR, CL_FIREBALL, V3_FIREBALL, 0},
     {'2', 0, 0, 1, 0, "DIVINE HASTE", TGT_CHR, CL_HEAL, 34, 0},
     {'3', 0, 0, 1, 0, "INCINERATE", TGT_CHR, CL_INCINERATE, V3_FREEZE, 0},
-    {'4', 0, 0, 1, 0, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
+    {'4', 0, 0, 1, 0, "empty", -1, -1, -1, 0},
     {'5', 0, 0, 1, 0, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
     {'6', 0, 0, 1, 0, "HOLY BLESS", TGT_CHR, CL_BLESS, V3_BLESS, 0},
     {'7', 0, 0, 1, 0, "SANCTUARY", TGT_SLF, CL_HEAL, V3_HEAL, 0},
@@ -121,7 +121,7 @@ KEYTAB v3_priest_keytab[] = {
     {'1', 0, 0, 1, 1, "FIRE", TGT_CHR, CL_FIREBALL, V3_FIREBALL, 0},
     {'2', 0, 0, 1, 1, "DIVINE HASTE", TGT_CHR, CL_HEAL, 34, 0},
     {'3', 0, 0, 1, 1, "INCINERATE", TGT_CHR, CL_INCINERATE, V3_FREEZE, 0},
-    {'4', 0, 0, 1, 1, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
+    {'4', 0, 0, 1, 1, "empty", -1, -1, -1, 0},
     {'5', 0, 0, 1, 1, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
     {'6', 0, 0, 1, 1, "HOLY BLESS", TGT_CHR, CL_BLESS, V3_BLESS, 0},
     {'7', 0, 0, 1, 1, "SANCTUARY", TGT_SLF, CL_HEAL, V3_HEAL, 0},
@@ -132,7 +132,7 @@ KEYTAB v3_priest_keytab[] = {
     {'1', 0, 0, 0, 1, "FIRE", TGT_MAP, CL_FIREBALL, V3_FIREBALL, 0},
     {'2', 0, 0, 0, 1, "DIVINE HASTE SELF", TGT_SLF, CL_WARCRY, 34, 0},
     {'3', 0, 0, 0, 1, "INCINERATE SELF", TGT_SLF, CL_FREEZE, V3_FREEZE, 0},
-    {'4', 0, 0, 0, 1, "SILENCE", TGT_SLF, CL_FLASH, V3_FLASH, 0},
+    {'4', 0, 0, 0, 1, "empty", -1, -1, -1, 0},
     {'5', 0, 0, 0, 1, "MAGIC SHIELD", TGT_SLF, CL_MAGICSHIELD, V3_MAGICSHIELD, 0},
     {'6', 0, 0, 0, 1, "HOLY BLESS SELF", TGT_SLF, CL_BLESS, V3_BLESS, 0},
     {'7', 0, 0, 0, 1, "SANCTUARY", TGT_SLF, CL_HEAL, V3_HEAL, 0},
@@ -153,7 +153,7 @@ const char *priest_skill_name(int v)
     case 28: return "Holy Bless";
     case 29: return "Sanctuary";
     case 30: return "Incinerate";
-    case 32: return "Silence";
+    case 32: return "Fervor";
     case 34: return "Divine Haste";
     }
     return 0;
@@ -165,7 +165,7 @@ const char *priest_skill_desc(int v)
     case 28: return "Holy Bless empowers you or an ally, raising attributes and speed. It stacks on top of a mage's Bless and can be extended with Duration. The priest's signature blessing.";
     case 29: return "Sanctuary surrounds you with a draining aura, siphoning mana (or, failing that, magic shield) from nearby enemies into your own reserves. The more foes around you, the more you leech.";
     case 30: return "Incinerate summons a red orb of holy fire that orbits its bearer, searing nearby enemies with damage that bypasses armor and magic shield. Cast it on yourself or on an ally to let them carry it. Only one orb may burn at a time.";
-    case 32: return "Silence unleashes a burst that interrupts and slows nearby enemies, disrupting their attacks and spellcasting.";
+    case 32: return "Fervor is a passive devotion, not a spell. It cannot be cast: simply raising it empowers every other priest spell you know, in the same way Tactics sharpens a warrior. Each point of Fervor adds a fifth of its value to the power of your Fire, Incinerate, Holy Bless, Sanctuary, Magic Shield and Divine Haste.";
     case 34: return "Divine Haste blesses you with holy speed, greatly increasing your movement and attack tempo for a time.";
     }
     return 0;

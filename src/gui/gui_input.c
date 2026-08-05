@@ -242,6 +242,38 @@ void gui_sdl_keyproc(SDL_Keycode wparam)
 				continue;
 			}
 
+			// chrsel is resolved with NEAR_NOTSELF, so Ctrl+key can only ever be aimed at
+			// somebody else and every self-buff had to go through Alt. Let Ctrl cover both
+			// cases: if the cursor is on the player, or on nobody at all, use the binding
+			// the player would have got from Alt+key instead. Offensive spells stay safe,
+			// because their Alt row targets the ground rather than the caster.
+			if (vk_char && keytab[i].tgt == TGT_CHR) {
+				int useself = 0;
+
+				if (chrsel == MAXMN || !map[chrsel].cn) {
+					useself = 1;
+				} else if (get_near_ex(mousex, mousey, NEAR_CHAR, 3) == (map_index_t)plrmn) {
+					useself = 1;
+				}
+
+				if (useself) {
+					int j;
+
+					for (j = 0; j < max_keytab; j++) {
+						if (keytab[j].keycode != keytab[i].keycode) {
+							continue;
+						}
+						if (keytab[j].vk_item || keytab[j].vk_char || !keytab[j].vk_spell) {
+							continue;
+						}
+						if (keytab[j].cl_spell > 0) {
+							i = j;
+						}
+						break;
+					}
+				}
+			}
+
 			if (keytab[i].cl_spell) {
 				if (keytab[i].tgt == TGT_MAP) {
 					exec_cmd(CMD_MAP_CAST_K, keytab[i].cl_spell);
